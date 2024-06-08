@@ -23,8 +23,10 @@ app.get('/download', async (req, res) => {
     try {
         const info = await ytdl.getInfo(url);
         const title = info.videoDetails.title.replace(/[^a-zA-Z0-9]/g, '_');
-        res.setHeader('Content-Disposition', `attachment; filename="${title}.mp3"`);
         const stream = ytdl(url, { quality: 'highestaudio' });
+        
+        res.setHeader('Content-Disposition', `attachment; filename="${title}.mp3"`);
+        res.setHeader('Content-Type', 'audio/mpeg');
 
         ffmpeg(stream).audioBitrate(128).toFormat('mp3').pipe(res, { end: true });
 
