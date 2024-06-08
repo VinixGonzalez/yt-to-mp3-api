@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 7474;
 
 app.get('/download', async (req, res) => {
-    const url = req.query.url;
+    let url = req.query.url;
 
     if (!url) {
         return res.status(400).send('URL not provided.');
@@ -27,7 +27,7 @@ app.get('/download', async (req, res) => {
         ffmpeg(stream).audioBitrate(128).toFormat('mp3').pipe(res, { end: true });
 
     } catch (error) {
-        res.status(500).send('Error downloading the video');
+        res.status(500).send('Error downloading the audio');
     }
 })
 
