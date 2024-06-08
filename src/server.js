@@ -1,10 +1,12 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
 const ffmpeg = require('fluent-ffmpeg');
+const cors = require('cors');
 
 
 const app = express();
 const port = process.env.PORT || 7474;
+app.use(cors());
 
 app.get('/download', async (req, res) => {
     let url = req.query.url;
