@@ -2,8 +2,9 @@ const express = require('express');
 const ytdl = require('ytdl-core');
 const ffmpeg = require('fluent-ffmpeg');
 
+
 const app = express();
-const port = 7474;
+const port = process.env.PORT || 7474;
 
 app.get('/download', async (req, res) => {
     const url = req.query.url;
